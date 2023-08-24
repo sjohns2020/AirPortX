@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+//Server.js 
+
 // Eliminating CORS issues
 const cors = require("cors")
 app.use(cors());
