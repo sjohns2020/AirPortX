@@ -32,9 +32,10 @@ exports.create = (req, res) => {
 
 // Retrieve all Flights from the database (with condition).
 exports.findAll = (req, res) => {
-    const title = req.query.title;
+
+    const departure = req.query.departure;
   
-    Flight.getAll(title, (err, data) => {
+    Flight.getAll(departure, (err, data) => {
       if (err)
         res.status(500).send({
           message:
@@ -44,8 +45,9 @@ exports.findAll = (req, res) => {
     });
   };
   
-//   exports.findAllPublished = (req, res) => {
-//     Flight.getAllPublished((err, data) => {
+//   exports.findAllDeparting = (req, res) => {
+
+//     Flight.getAllDepartingFlights(req.params.departed, (err, data) => {
 //       if (err)
 //         res.status(500).send({
 //           message:

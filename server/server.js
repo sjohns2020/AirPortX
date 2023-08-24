@@ -1,41 +1,27 @@
 const express = require("express");
-const cors = require("cors")
-
 const app = express();
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-};
+// Eliminating CORS issues
+const cors = require("cors")
+app.use(cors());
 
-app.use(cors(corsOptions));
-
-// parse requests of content-type - application/json
+// Parse requests into json
 app.use(express.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
-// app.use(express.urlencoded({ extended: true }));
 
-// simple route
+// API home route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to my API.  Go to /api/tutorials to see all tutorials." });
+    res.json({ message: "Go to /api/flights to see all Flights." });
 });
 
 // Created a resueable router for any table in the database. 
 const createRouter = require("./routes/router.js")
 
-// Tutorials
-const tutorials = require("./controllers/tutorial.controller.js");
-const turoialsRouter = createRouter(tutorials);
-app.use('/api/tutorials', turoialsRouter);
-// Flights
+
+// Create a flights Enpoint Router
 const flights = require("./controllers/flight.controller.js");
 const flightsRouter = createRouter(flights);
 app.use('/api/flights', flightsRouter);
-
-
-
-
-// require("./routes/tutorial.routes.js")(app);
 
 
 // set port, listen for requests
